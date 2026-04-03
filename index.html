@@ -239,22 +239,40 @@
 				<h2 class="font-display text-3xl tracking-tight md:text-4xl">Selected Projects</h2>
 				<a href="#" class="text-sm font-semibold text-[var(--muted)] transition hover:text-[var(--accent)]">View all</a>
 			</div>
-			<div class="grid gap-5 md:grid-cols-2">
-				<article class="rounded-3xl border border-[var(--stroke)] bg-[var(--surface)] p-6 shadow-card transition hover:-translate-y-1">
-					<p class="text-xs font-semibold uppercase tracking-wider text-[var(--muted)]">SaaS Platform</p>
-					<h3 class="mt-2 font-display text-2xl">MetricFlow</h3>
-					<p class="mt-3 text-sm text-[var(--muted)]">
-						Analytics dashboard with streaming events, custom reports, and team collaboration.
-					</p>
-					<p class="mt-4 text-xs font-medium text-[color-mix(in_srgb,var(--text)_78%,transparent)]">React, Laravel, PostgreSQL</p>
-				</article>
-				<article class="rounded-3xl border border-[var(--stroke)] bg-[var(--surface)] p-6 shadow-card transition hover:-translate-y-1">
-					<p class="text-xs font-semibold uppercase tracking-wider text-[var(--muted)]">Developer Tooling</p>
-					<h3 class="mt-2 font-display text-2xl">ShipCLI</h3>
-					<p class="mt-3 text-sm text-[var(--muted)]">
-						Internal deployment toolkit reducing release time by 43% through smart automation.
-					</p>
-					<p class="mt-4 text-xs font-medium text-[color-mix(in_srgb,var(--text)_78%,transparent)]">Django, MySQL, Linux</p>
+			<div class="grid gap-5">
+				<article class="overflow-hidden rounded-3xl border border-[var(--stroke)] bg-[var(--surface)] shadow-card transition hover:-translate-y-1">
+					<div class="relative border-b border-[var(--stroke)] bg-[#f3eadf]">
+						<a href="https://mandarin-vocabulary-miner.vercel.app/" target="_blank" rel="noreferrer" class="absolute inset-0 z-10 block" aria-label="Open Hanlearn: Mandarin Vocabulary Miner live app"></a>
+						<iframe
+							src="https://mandarin-vocabulary-miner.vercel.app/"
+							title="Live preview of Hanlearn: Mandarin Vocabulary Miner"
+							class="h-64 w-full bg-white sm:h-72 lg:h-80"
+							loading="lazy"
+							referrerpolicy="no-referrer"
+						></iframe>
+							<div class="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[var(--surface)] to-transparent"></div>
+					</div>
+					<div class="p-6 sm:p-7">
+						<div class="flex flex-wrap items-start justify-between gap-4">
+							<div>
+								<p class="text-xs font-semibold uppercase tracking-wider text-[var(--muted)]">Language Learning Tool</p>
+								<h3 class="mt-2 font-display text-2xl sm:text-3xl">Hanlearn: Mandarin Vocabulary Miner</h3>
+							</div>
+							<div class="flex flex-wrap gap-2 text-sm font-semibold">
+								<a href="https://mandarin-vocabulary-miner.vercel.app/" target="_blank" rel="noreferrer" class="rounded-full bg-[var(--accent)] px-4 py-2 text-[var(--accent-contrast)] transition hover:bg-[var(--accent-soft)]">Live Preview</a>
+								<a href="https://github.com/jal9o3/Mandarin-Vocabulary-Miner" target="_blank" rel="noreferrer" class="inline-flex items-center gap-2 rounded-full border border-[var(--button-border)] px-4 py-2 transition hover:border-[var(--accent)] hover:text-[var(--accent)]">
+									<svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" class="h-4 w-4">
+										<path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.426 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.866-.013-1.699-2.782.605-3.369-1.344-3.369-1.344-.455-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.071 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.091-.647.349-1.088.635-1.338-2.221-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.027A9.564 9.564 0 0 1 12 6.844a9.56 9.56 0 0 1 2.504.337c1.909-1.297 2.748-1.027 2.748-1.027.546 1.378.203 2.397.1 2.65.64.7 1.028 1.595 1.028 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.481A10.02 10.02 0 0 0 22 12.017C22 6.484 17.523 2 12 2Z"></path>
+									</svg>
+									<span>GitHub</span>
+								</a>
+							</div>
+						</div>
+						<p class="mt-4 max-w-3xl text-sm text-[var(--muted)] sm:text-base">
+							A tool to help Mandarin learners generate flashcards from unknown words in reading texts that they are actually interested in, so they can turn difficult passages into focused study material.
+						</p>
+						<p class="mt-4 text-xs font-medium text-[color-mix(in_srgb,var(--text)_78%,transparent)]">React, Vite, Django REST, Mandarin text analysis, flashcard generation</p>
+					</div>
 				</article>
 			</div>
 		</section>
