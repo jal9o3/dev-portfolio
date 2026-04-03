@@ -17,6 +17,14 @@
 	/>
 
 	<script src="https://cdn.tailwindcss.com"></script>
+	<script src="https://unpkg.com/lucide@latest"></script>
+	<script>
+		(() => {
+			const storedTheme = localStorage.getItem('theme');
+			const preferredTheme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+			document.documentElement.dataset.theme = storedTheme || preferredTheme;
+		})();
+	</script>
 	<script>
 		tailwind.config = {
 			theme: {
@@ -57,19 +65,56 @@
 	<style>
 		:root {
 			--bg: #1c1c1c;
+			--bg-end: #181818;
 			--surface: #262626;
+			--surface-strong: rgba(38, 38, 38, 0.9);
 			--stroke: rgba(212, 197, 176, 0.26);
+			--text: #f4f4f4;
+			--muted: #d4c5b0;
+			--accent: #bfa181;
+			--accent-soft: #d4c5b0;
+			--accent-contrast: #1c1c1c;
+			--button-border: rgba(244, 244, 244, 0.4);
+			--contact-bg: #1c1c1c;
+			--grain-dot: rgba(244, 244, 244, 0.05);
+			--glow-a: rgba(191, 161, 129, 0.2);
+			--glow-b: rgba(212, 197, 176, 0.16);
+		}
+
+		html[data-theme='light'] {
+			--bg: #f5efe6;
+			--bg-end: #efe7dc;
+			--surface: rgba(255, 251, 245, 0.94);
+			--surface-strong: rgba(255, 251, 245, 0.9);
+			--stroke: rgba(112, 87, 54, 0.18);
+			--text: #241d17;
+			--muted: #6f5d47;
+			--accent: #8f6741;
+			--accent-soft: #d8b28c;
+			--accent-contrast: #fffaf4;
+			--button-border: rgba(36, 29, 23, 0.22);
+			--contact-bg: #201913;
+			--grain-dot: rgba(36, 29, 23, 0.04);
+			--glow-a: rgba(143, 103, 65, 0.18);
+			--glow-b: rgba(216, 178, 140, 0.12);
 		}
 
 		html {
 			scroll-behavior: smooth;
+			color-scheme: dark;
+		}
+
+		html[data-theme='light'] {
+			color-scheme: light;
 		}
 
 		body {
 			background:
-				radial-gradient(circle at 10% 10%, rgba(191, 161, 129, 0.2), transparent 35%),
-				radial-gradient(circle at 90% 20%, rgba(212, 197, 176, 0.16), transparent 35%),
-				linear-gradient(160deg, var(--bg), #212121 45%, #181818 100%);
+				radial-gradient(circle at 10% 10%, var(--glow-a), transparent 35%),
+				radial-gradient(circle at 90% 20%, var(--glow-b), transparent 35%),
+				linear-gradient(160deg, var(--bg), color-mix(in srgb, var(--bg) 82%, #000 18%) 45%, var(--bg-end) 100%);
+			color: var(--text);
+			transition: background 220ms ease, color 220ms ease;
 		}
 
 		.grain::before {
@@ -79,66 +124,89 @@
 			pointer-events: none;
 			opacity: 0.25;
 			background-image:
-				radial-gradient(rgba(244, 244, 244, 0.05) 0.6px, transparent 0.6px);
+				radial-gradient(var(--grain-dot) 0.6px, transparent 0.6px);
 			background-size: 2px 2px;
 			z-index: -1;
 		}
+
+		.theme-toggle svg {
+			height: 1.05rem;
+			width: 1.05rem;
+			stroke-width: 1.9;
+			transition: transform 180ms ease, opacity 180ms ease;
+		}
+
+		.theme-toggle[data-theme='light'] svg {
+			transform: rotate(18deg);
+		}
 	</style>
 </head>
-<body class="grain font-body text-sand antialiased">
+
+<body class="grain font-body antialiased">
 	<header class="mx-auto max-w-6xl px-6 pt-6 md:pt-10">
-		<nav class="flex items-center justify-between rounded-2xl border border-[var(--stroke)] bg-[var(--surface)]/90 px-4 py-3 shadow-card backdrop-blur md:px-6">
-			<a href="#" class="font-display text-lg tracking-tight md:text-xl">Jerome<span class="text-coral"> Loria</span></a>
+		<nav class="flex items-center justify-between rounded-2xl border border-[var(--stroke)] bg-[var(--surface-strong)] px-4 py-3 shadow-card backdrop-blur md:px-6">
+			<a href="#" class="font-display text-lg tracking-tight md:text-xl">Jerome<span class="text-[var(--accent)]"> Loria</span></a>
 			<ul class="hidden items-center gap-6 text-sm font-medium md:flex">
-				<li><a class="transition hover:text-coral" href="#projects">Projects</a></li>
-				<li><a class="transition hover:text-coral" href="#experience">Experience</a></li>
-				<li><a class="transition hover:text-coral" href="#skills">Skills</a></li>
-				<li><a class="transition hover:text-coral" href="#contact">Contact</a></li>
+				<li><a class="transition hover:text-[var(--accent)]" href="#projects">Projects</a></li>
+				<li><a class="transition hover:text-[var(--accent)]" href="#experience">Experience</a></li>
+				<li><a class="transition hover:text-[var(--accent)]" href="#skills">Skills</a></li>
+				<li><a class="transition hover:text-[var(--accent)]" href="#contact">Contact</a></li>
 			</ul>
-			<a
-				href="#contact"
-				class="rounded-full bg-coral px-4 py-2 text-xs font-semibold text-ink transition hover:-translate-y-0.5 hover:bg-mint md:text-sm"
-			>
-				Let's Build
-			</a>
+			<div class="flex items-center gap-2 sm:gap-3">
+				<button
+					type="button"
+					id="theme-toggle"
+					class="theme-toggle inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--button-border)] bg-[var(--surface)] text-[var(--muted)] transition hover:-translate-y-0.5 hover:border-[var(--accent)] hover:text-[var(--text)]"
+					aria-label="Toggle light and dark mode"
+					aria-pressed="false"
+				>
+					<span id="theme-toggle-icon" aria-hidden="true" data-lucide="sun-moon"></span>
+				</button>
+				<a
+					href="#contact"
+					class="rounded-full bg-[var(--accent)] px-4 py-2 text-xs font-semibold text-[var(--accent-contrast)] transition hover:-translate-y-0.5 hover:bg-[var(--accent-soft)] md:text-sm"
+				>
+					Let's Build
+				</a>
+			</div>
 		</nav>
 	</header>
 
 	<main class="mx-auto max-w-6xl px-6 pb-16">
 		<section class="relative grid gap-10 py-14 md:grid-cols-[0.85fr_1.15fr] md:py-20">
 			<div class="space-y-6 animate-riseIn md:order-2">
-				<p class="inline-flex items-center gap-2 rounded-full border border-[var(--stroke)] bg-[var(--surface)] px-3 py-1 text-xs font-semibold uppercase tracking-widest text-slate">
-					<span class="h-2 w-2 rounded-full bg-mint"></span>
+				<p class="inline-flex items-center gap-2 rounded-full border border-[var(--stroke)] bg-[var(--surface)] px-3 py-1 text-xs font-semibold uppercase tracking-widest text-[var(--muted)]">
+					<span class="h-2 w-2 rounded-full bg-[var(--accent-soft)]"></span>
 					Available for new roles
 				</p>
 				<h1 class="font-display text-4xl leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
 					a software developer crafting
-					<span class="text-coral">fast, thoughtful</span>
+					<span class="text-[var(--accent)]">fast, thoughtful</span>
 					digital products.
 				</h1>
-				<p class="max-w-xl text-base text-slate md:text-lg">
+				<p class="max-w-xl text-base text-[var(--muted)] md:text-lg">
 					I build end-to-end web applications with clean architecture,
 					measurable performance, and product-first UX.
 					Replace this text with your own short value proposition.
 				</p>
 				<div class="flex flex-wrap items-center gap-3 pt-2">
-					<a href="#projects" class="rounded-full bg-coral px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:shadow-card">
+					<a href="#projects" class="rounded-full bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-[var(--accent-contrast)] transition hover:-translate-y-0.5 hover:shadow-card">
 						See Work
 					</a>
-					<a href="#" class="rounded-full border border-sand/50 px-5 py-3 text-sm font-semibold transition hover:-translate-y-0.5 hover:bg-sand hover:text-ink">
+					<a href="#" class="rounded-full border border-[var(--button-border)] px-5 py-3 text-sm font-semibold transition hover:-translate-y-0.5 hover:bg-[var(--text)] hover:text-[var(--bg)]">
 						Download Resume
 					</a>
 				</div>
 			</div>
 
 			<aside class="relative animate-riseIn [animation-delay:180ms] md:order-1">
-				<div class="absolute -right-2 -top-3 h-20 w-20 rounded-2xl bg-mint/70 blur-sm animate-drift"></div>
-				<div class="absolute -left-3 bottom-8 h-16 w-16 rounded-full bg-coral/70 blur-sm animate-drift [animation-delay:1.2s]"></div>
+				<div class="absolute -right-2 -top-3 h-20 w-20 rounded-2xl bg-[var(--accent-soft)]/70 blur-sm animate-drift"></div>
+				<div class="absolute -left-3 bottom-8 h-16 w-16 rounded-full bg-[var(--accent)]/70 blur-sm animate-drift [animation-delay:1.2s]"></div>
 				<div class="relative mb-4 flex flex-col items-center overflow-hidden rounded-3xl border border-[var(--stroke)] bg-[var(--surface)] p-4 shadow-card sm:p-5">
 					<img
 						src="assets/developer.png"
 						alt="Portrait of Jerome Loria"
-						class="h-48 w-48 rounded-full border-4 border-sand object-cover object-center shadow-card sm:h-56 sm:w-56"
+						class="h-48 w-48 rounded-full border-4 border-[var(--text)] object-cover object-center shadow-card sm:h-56 sm:w-56"
 					/>
 					<p class="mt-4 text-center font-display text-xl">Jerome Loria</p>
 				</div>
@@ -146,15 +214,15 @@
 					<p class="font-display text-lg">Snapshot</p>
 					<dl class="mt-5 space-y-4 text-sm">
 						<div class="flex items-center justify-between border-b border-[var(--stroke)] pb-3">
-							<dt class="text-slate">Location</dt>
+							<dt class="text-[var(--muted)]">Location</dt>
 							<dd class="font-semibold">Remote / Philippines</dd>
 						</div>
 						<div class="flex items-center justify-between border-b border-[var(--stroke)] pb-3">
-							<dt class="text-slate">Primary Stack</dt>
+							<dt class="text-[var(--muted)]">Primary Stack</dt>
 							<dd class="font-semibold">React, Bootstrap/Tailwind, Laravel/Django</dd>
 						</div>
 						<div class="flex items-center justify-between border-b border-[var(--stroke)] pb-3">
-							<dt class="text-slate">Experience</dt>
+							<dt class="text-[var(--muted)]">Experience</dt>
 							<dd class="font-semibold">5+ years</dd>
 						</div>
 						<!-- <div class="flex items-center justify-between">
@@ -169,24 +237,24 @@
 		<section id="projects" class="py-8 md:py-12">
 			<div class="mb-6 flex items-end justify-between gap-4">
 				<h2 class="font-display text-3xl tracking-tight md:text-4xl">Selected Projects</h2>
-				<a href="#" class="text-sm font-semibold text-slate transition hover:text-coral">View all</a>
+				<a href="#" class="text-sm font-semibold text-[var(--muted)] transition hover:text-[var(--accent)]">View all</a>
 			</div>
 			<div class="grid gap-5 md:grid-cols-2">
 				<article class="rounded-3xl border border-[var(--stroke)] bg-[var(--surface)] p-6 shadow-card transition hover:-translate-y-1">
-					<p class="text-xs font-semibold uppercase tracking-wider text-slate">SaaS Platform</p>
+					<p class="text-xs font-semibold uppercase tracking-wider text-[var(--muted)]">SaaS Platform</p>
 					<h3 class="mt-2 font-display text-2xl">MetricFlow</h3>
-					<p class="mt-3 text-sm text-slate">
+					<p class="mt-3 text-sm text-[var(--muted)]">
 						Analytics dashboard with streaming events, custom reports, and team collaboration.
 					</p>
-					<p class="mt-4 text-xs font-medium text-sand/80">React, Laravel, PostgreSQL</p>
+					<p class="mt-4 text-xs font-medium text-[color-mix(in_srgb,var(--text)_78%,transparent)]">React, Laravel, PostgreSQL</p>
 				</article>
 				<article class="rounded-3xl border border-[var(--stroke)] bg-[var(--surface)] p-6 shadow-card transition hover:-translate-y-1">
-					<p class="text-xs font-semibold uppercase tracking-wider text-slate">Developer Tooling</p>
+					<p class="text-xs font-semibold uppercase tracking-wider text-[var(--muted)]">Developer Tooling</p>
 					<h3 class="mt-2 font-display text-2xl">ShipCLI</h3>
-					<p class="mt-3 text-sm text-slate">
+					<p class="mt-3 text-sm text-[var(--muted)]">
 						Internal deployment toolkit reducing release time by 43% through smart automation.
 					</p>
-					<p class="mt-4 text-xs font-medium text-sand/80">Django, MySQL, Linux</p>
+					<p class="mt-4 text-xs font-medium text-[color-mix(in_srgb,var(--text)_78%,transparent)]">Django, MySQL, Linux</p>
 				</article>
 			</div>
 		</section>
@@ -197,18 +265,18 @@
 				<article class="rounded-2xl border border-[var(--stroke)] bg-[var(--surface)] p-5 shadow-card sm:p-6">
 					<div class="flex flex-wrap items-center justify-between gap-2">
 						<h3 class="font-display text-xl">Senior Software Engineer, Northstar Labs</h3>
-						<p class="text-xs font-semibold uppercase tracking-wider text-slate">2023 - Present</p>
+						<p class="text-xs font-semibold uppercase tracking-wider text-[var(--muted)]">2023 - Present</p>
 					</div>
-					<p class="mt-3 text-sm text-slate">
+					<p class="mt-3 text-sm text-[var(--muted)]">
 						Led platform modernization across frontend and backend, improving reliability and shipping velocity.
 					</p>
 				</article>
 				<article class="rounded-2xl border border-[var(--stroke)] bg-[var(--surface)] p-5 shadow-card sm:p-6">
 					<div class="flex flex-wrap items-center justify-between gap-2">
 						<h3 class="font-display text-xl">Software Engineer, Pixel Harbor</h3>
-						<p class="text-xs font-semibold uppercase tracking-wider text-slate">2020 - 2023</p>
+						<p class="text-xs font-semibold uppercase tracking-wider text-[var(--muted)]">2020 - 2023</p>
 					</div>
-					<p class="mt-3 text-sm text-slate">
+					<p class="mt-3 text-sm text-[var(--muted)]">
 						Built customer-facing web apps and APIs, with strong focus on performance budgets and DX.
 					</p>
 				</article>
@@ -230,18 +298,67 @@
 		</section>
 
 		<section id="contact" class="pt-10">
-			<div class="rounded-3xl border border-coral/40 bg-ink px-6 py-8 text-sand sm:px-8 sm:py-10">
+			<div class="rounded-3xl border border-[color-mix(in_srgb,var(--accent)_40%,transparent)] bg-[var(--contact-bg)] px-6 py-8 text-[var(--text)] sm:px-8 sm:py-10">
 				<h2 class="font-display text-3xl tracking-tight md:text-4xl">Let's build something useful.</h2>
-				<p class="mt-3 max-w-2xl text-sm text-sand/80 md:text-base">
+				<p class="mt-3 max-w-2xl text-sm text-[color-mix(in_srgb,var(--text)_80%,transparent)] md:text-base">
 					Replace links with your real contact info. This section is intentionally direct for hiring managers and clients.
 				</p>
 				<div class="mt-6 flex flex-wrap gap-3 text-sm font-semibold">
-					<a class="rounded-full bg-sand px-4 py-2 text-ink transition hover:bg-mint" href="mailto:hello@yourdomain.dev">hello@yourdomain.dev</a>
-					<a class="rounded-full border border-sand/50 px-4 py-2 transition hover:border-mint hover:text-mint" href="#">GitHub</a>
-					<a class="rounded-full border border-sand/50 px-4 py-2 transition hover:border-mint hover:text-mint" href="#">LinkedIn</a>
+					<a class="rounded-full bg-[var(--text)] px-4 py-2 text-[var(--bg)] transition hover:bg-[var(--accent-soft)]" href="mailto:hello@yourdomain.dev">hello@yourdomain.dev</a>
+					<a class="rounded-full border border-[var(--button-border)] px-4 py-2 transition hover:border-[var(--accent-soft)] hover:text-[var(--accent-soft)]" href="#">GitHub</a>
+					<a class="rounded-full border border-[var(--button-border)] px-4 py-2 transition hover:border-[var(--accent-soft)] hover:text-[var(--accent-soft)]" href="#">LinkedIn</a>
 				</div>
 			</div>
 		</section>
 	</main>
+
+	<script>
+		(() => {
+			const root = document.documentElement;
+			const toggle = document.getElementById('theme-toggle');
+			const toggleIcon = document.getElementById('theme-toggle-icon');
+			const themeIcons = {
+				sun: `
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+						<circle cx="12" cy="12" r="4"></circle>
+						<path d="M12 2v2"></path>
+						<path d="M12 20v2"></path>
+						<path d="m4.93 4.93 1.41 1.41"></path>
+						<path d="m17.66 17.66 1.41 1.41"></path>
+						<path d="M2 12h2"></path>
+						<path d="M20 12h2"></path>
+						<path d="m6.34 17.66-1.41 1.41"></path>
+						<path d="m19.07 4.93-1.41 1.41"></path>
+					</svg>
+				`,
+				moon: `
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+						<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9"></path>
+					</svg>
+				`,
+			};
+
+			if (!toggle || !toggleIcon) {
+				return;
+			}
+
+			const applyTheme = (theme) => {
+				root.dataset.theme = theme;
+				toggle.dataset.theme = theme;
+				const nextIcon = theme === 'light' ? 'moon' : 'sun';
+				toggleIcon.innerHTML = themeIcons[nextIcon];
+				toggle.setAttribute('aria-pressed', String(theme === 'light'));
+				toggle.setAttribute('title', theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode');
+			};
+
+			applyTheme(root.dataset.theme || 'dark');
+
+			toggle.addEventListener('click', () => {
+				const nextTheme = root.dataset.theme === 'light' ? 'dark' : 'light';
+				localStorage.setItem('theme', nextTheme);
+				applyTheme(nextTheme);
+			});
+		})();
+	</script>
 </body>
 </html>
