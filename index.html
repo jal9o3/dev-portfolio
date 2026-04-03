@@ -81,6 +81,7 @@
 			--grain-dot: rgba(244, 244, 244, 0.05);
 			--glow-a: rgba(191, 161, 129, 0.2);
 			--glow-b: rgba(212, 197, 176, 0.16);
+			--status-dot: #86efac;
 		}
 
 		html[data-theme='light'] {
@@ -99,6 +100,7 @@
 			--grain-dot: rgba(36, 29, 23, 0.04);
 			--glow-a: rgba(143, 103, 65, 0.18);
 			--glow-b: rgba(216, 178, 140, 0.12);
+			--status-dot: #4ade80;
 		}
 
 		html {
@@ -178,7 +180,7 @@
 		<section class="relative grid gap-10 py-14 md:grid-cols-[0.85fr_1.15fr] md:py-20">
 			<div class="space-y-6 animate-riseIn md:order-2">
 				<p class="inline-flex items-center gap-2 rounded-full border border-[var(--stroke)] bg-[var(--surface)] px-3 py-1 text-xs font-semibold uppercase tracking-widest text-[var(--muted)]">
-					<span class="h-2 w-2 rounded-full bg-[var(--accent-soft)]"></span>
+					<span class="h-2 w-2 rounded-full bg-[var(--status-dot)]"></span>
 					Available for new roles
 				</p>
 				<h1 class="font-display text-4xl leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
@@ -211,6 +213,7 @@
 						class="h-48 w-48 rounded-full border-4 border-[var(--text)] object-cover object-center shadow-card sm:h-56 sm:w-56"
 					/>
 					<p class="mt-4 text-center font-display text-xl">Jerome Loria</p>
+					<p class="mt-1 text-center text-sm font-semibold uppercase tracking-[0.14em] text-[var(--muted)]">Full-Stack Developer</p>
 				</div>
 				<div class="relative rounded-3xl border border-[var(--stroke)] bg-[var(--surface)] p-6 shadow-card sm:p-7">
 					<p class="font-display text-lg">Snapshot</p>
