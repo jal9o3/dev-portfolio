@@ -143,6 +143,15 @@
 		.theme-toggle[data-theme='light'] svg {
 			transform: rotate(18deg);
 		}
+
+		.no-scrollbar {
+			-ms-overflow-style: none;
+			scrollbar-width: none;
+		}
+
+		.no-scrollbar::-webkit-scrollbar {
+			display: none;
+		}
 	</style>
 </head>
 
@@ -245,8 +254,8 @@
 			<div class="mb-6">
 				<h2 class="font-display text-3xl tracking-tight md:text-4xl">Featured Projects</h2>
 			</div>
-			<div class="grid gap-5">
-				<article class="overflow-hidden rounded-3xl border border-[var(--stroke)] bg-[var(--surface)] shadow-card transition hover:-translate-y-1">
+			<div class="-mx-6 flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-2 no-scrollbar scroll-px-6 md:mx-0 md:grid md:px-0 md:pb-0">
+				<article class="w-[92%] shrink-0 snap-start overflow-hidden rounded-3xl border border-[var(--stroke)] bg-[var(--surface)] shadow-card transition hover:-translate-y-1 md:w-auto">
 					<div class="relative border-b border-[var(--stroke)] bg-[#f3eadf]">
 						<a href="https://rizal-prog-lang.onrender.com/" target="_blank" rel="noreferrer" class="absolute inset-0 z-10 block" aria-label="Open Rizal Programming Language live app"></a>
 						<div class="flex h-40 items-center justify-center bg-gradient-to-br from-[var(--accent-soft)]/40 via-[var(--surface)] to-[var(--accent-soft)]/20 px-6 sm:h-48 md:hidden">
@@ -283,7 +292,7 @@
 						<p class="mt-4 text-xs font-medium text-[color-mix(in_srgb,var(--text)_78%,transparent)]">Programming Language, Tagalog, Education</p>
 					</div>
 				</article>
-				<article class="overflow-hidden rounded-3xl border border-[var(--stroke)] bg-[var(--surface)] shadow-card transition hover:-translate-y-1">
+				<article class="w-[92%] shrink-0 snap-start overflow-hidden rounded-3xl border border-[var(--stroke)] bg-[var(--surface)] shadow-card transition hover:-translate-y-1 md:w-auto">
 					<div class="relative border-b border-[var(--stroke)] bg-[#f3eadf]">
 						<a href="https://mandarin-vocabulary-miner.vercel.app/" target="_blank" rel="noreferrer" class="absolute inset-0 z-10 block" aria-label="Open Hanlearn: Mandarin Vocabulary Miner live app"></a>
 						<div class="flex h-40 items-center justify-center bg-gradient-to-br from-[var(--accent-soft)]/40 via-[var(--surface)] to-[var(--accent-soft)]/20 px-6 sm:h-48 md:hidden">
@@ -325,8 +334,8 @@
 
 		<section id="experience" class="py-8 md:py-12">
 			<h2 class="font-display text-3xl tracking-tight md:text-4xl">Experience</h2>
-			<div class="mt-6 space-y-4">
-				<article class="rounded-2xl border border-[var(--stroke)] bg-[var(--surface)] p-5 shadow-card sm:p-6">
+			<div class="mt-6 -mx-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-2 no-scrollbar scroll-px-6 md:mx-0 md:block md:space-y-4 md:px-0 md:pb-0">
+				<article class="w-[92%] shrink-0 snap-start rounded-2xl border border-[var(--stroke)] bg-[var(--surface)] p-5 shadow-card sm:p-6 md:w-auto">
 					<div class="flex flex-wrap items-center justify-between gap-2">
 						<h3 class="font-display text-xl">Technical Trainer, MAB Business Solutions</h3>
 						<p class="text-xs font-semibold uppercase tracking-wider text-[var(--muted)]">Jun 2026 - Jul 2026</p>
@@ -339,7 +348,7 @@
 						<li>Coordinated with fellow trainers to ensure technical accuracy and curriculum quality.</li>
 					</ul>
 				</article>
-				<article class="rounded-2xl border border-[var(--stroke)] bg-[var(--surface)] p-5 shadow-card sm:p-6">
+				<article class="w-[92%] shrink-0 snap-start rounded-2xl border border-[var(--stroke)] bg-[var(--surface)] p-5 shadow-card sm:p-6 md:w-auto">
 					<div class="flex flex-wrap items-center justify-between gap-2">
 						<h3 class="min-w-0 font-display text-xl leading-snug">Programmer/<wbr>Instructor, The Lewis College of Sorsogon</h3>
 						<p class="text-xs font-semibold uppercase tracking-wider text-[var(--muted)]">Jul 2025 - May 2026</p>
@@ -352,7 +361,7 @@
 						<li>Performed quality assurance on compliance documents submitted for PEAC certification, supporting the institution's scholarship financial assistance program.</li>
 					</ul>
 				</article>
-				<article class="rounded-2xl border border-[var(--stroke)] bg-[var(--surface)] p-5 shadow-card sm:p-6">
+				<article class="w-[92%] shrink-0 snap-start rounded-2xl border border-[var(--stroke)] bg-[var(--surface)] p-5 shadow-card sm:p-6 md:w-auto">
 					<div class="flex flex-wrap items-center justify-between gap-2">
 						<h3 class="font-display text-xl">Student Intern, Iraya Energies</h3>
 						<p class="text-xs font-semibold uppercase tracking-wider text-[var(--muted)]">Jun 2024 - Jul 2024</p>
